@@ -1,0 +1,43 @@
+<footer [ngClass]="{'container-fluid': true, 'footer-hide': hideFooter}">
+    <!-- row negative margins were stretching layout width  // ADD mx-0 -->
+    <div class="row mx-0">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <div class="mr-1">
+                    <label>&nbsp;</label>
+                    <div><a href="https://www.nsgic.org/" target="_new"><img src="/public/img/nsgic-logo.png" width="200" alt="National States Geographic Information Council"></a></div>
+                    <div><a href="https://www.nsgic.org/" class="small" target="_new">National States Geographic Information Council</a></div>
+                    <div class="copyright">&copy;2017 NSGIC GIS Inventory</div>
+                </div>
+                <div class="mr-1">
+                    <label>TOOLS</label>
+                    <a routerLink="/search-data">Search Data</a>
+                    <a routerLink="/inventory">Status Map</a>
+                    <a routerLink="/directory">User Directory</a>
+                </div>
+                <div class="mr-1">
+                    <label>ABOUT</label>
+                    <a routerLink="/about-the-gis-inventory">About the Inventory</a>
+                    <a routerLink="/privacy-statement">Privacy</a>
+                    <a routerLink="/liability-statement">Liability</a>
+                </div>
+                <div class="mr-1">
+                    <label>SOCIAL</label>
+                    <a href="https://twitter.com/nsgic" target="_blank">Twitter</a>
+                    <a href="https://www.facebook.com/NSGIC" target="_blank">Facebook</a>
+                </div>
+                <div class="mr-1">
+                    <label>HELP DESK</label>
+                    <a href="mailto:support@gisinventory.net">Support Request</a>
+                    <a routerLink="/contribute-to-the-gis-inventory">Contribute</a>
+                </div>
+                <div>
+                    <label>CONTACT</label>
+                    <a href="mailto:info@gisinventory.net">Program Manager (NSGIC)</a>
+                    <a href="https://runskip.com/" target="_blank">System Developer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+

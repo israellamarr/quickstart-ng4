@@ -1,0 +1,56 @@
+<div (click)="toggleState()" id="nav-overlay" [ngClass]="{'nav-active': isIn == 'active'}"></div>
+<nav class="fixed-top navbar navbar-toggleable-md navbar-dark grey darken-2">
+    <div class="d-flex w-100 justify-content-between">
+        <a class="navbar-brand" routerLink="/">{{title}}</a>
+        <button (click)="toggleState()" class="navbar-toggler navbar-toggler-right align-self-center" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-lg-between" id="navbarNavDropdown" [@slideRightLeftAnimation]="isIn">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" routerLink="/search-data" [routerLinkActive]="['active']"><i class="icon ion-ios-search hidden-lg-up"></i> Search Data</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/inventory" [routerLinkActive]="['active']"><i class="icon ion-map hidden-lg-up"></i> Status Map</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/directory" [routerLinkActive]="['active']"><i class="icon ion-ios-people hidden-lg-up"></i> Directory</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="/account/dashboard" [routerLinkActive]="['active']"><i class="icon ion-person hidden-lg-up"></i> Dashboard</a></li>
+            </ul>
+            <div class="col-lg row no-gutters align-self-center align-items-stretch justify-content-lg-end">
+                <div id="more" class="py-2 py-lg-0" ngbDropdown>
+                    <button class="btn btn-sm primary-color mr-2" id="header-more-dropdown" ngbDropdownToggle>More</button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="header-more-dropdown">
+                        <a class="dropdown-item" routerLink="/about-the-gis-inventory">About The GIS Inventory</a>
+                        <a class="dropdown-item" routerLink="/contribute-to-the-gis-inventory">Contribute</a>
+                        <a class="dropdown-item" routerLink="/gis-inventory-metadata-best-practices">Metadata Best Practices</a>
+                        <a class="dropdown-item" routerLink="/acceptable-use-policy">Acceptable Use Policy</a>
+                        <a class="dropdown-item" routerLink="/privacy-statement">Privacy Statement</a>
+                        <a class="dropdown-item" routerLink="/liability-statement">Liability Statement</a>
+                        <a class="dropdown-item" routerLink="/about-nsgic">About NSGIC</a>
+                        <a class="dropdown-item" routerLink="/admin-guide">Admin Guide</a>
+                    </div>
+                </div>
+
+                <!-- IF USER NOT AUTHED -->
+                <div *ngIf=" ! authenticationService.isAuthenticated()" id="sign-in" class="py-2 py-lg-0">
+                    <a class="btn btn-sm warning-color-dark white-text" routerLink="/login">Sign In</a>
+                </div>
+                <div *ngIf=" ! authenticationService.isAuthenticated()" id="create-account" class="py-2 py-lg-0">
+                    <a class="btn btn-sm info-color" routerLink="/create-account">Create Account</a>
+                </div>
+
+                <!-- IF USER AUTHED -->
+                <div class="py-1 py-lg-0" ngbDropdown *ngIf="authenticationService.isAuthenticated()">
+                    <button class="btn btn-sm stylish-color" id="header-profile-dropdown" ngbDropdownToggle><i class="icon ion-person"></i></button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="header-profile-dropdown">
+                        <a class="dropdown-item hidden-md-down" routerLink="/account/dashboard">Dashboard</a>
+                        <a class="dropdown-item hidden-md-down" routerLink="/account">Your Profile</a>
+                        <a class="dropdown-item hidden-md-down" *ngIf="authenticationService.roleValidation({any:[appSettings.ROLE_SUPER_USER, appSettings.ROLE_NSGIC_STATE_REP, appSettings.ROLE_NSGIC_STATE_ADMIN]})" routerLink="/users">Users</a>
+                        <a class="dropdown-item hidden-md-down" *ngIf="authenticationService.roleValidation({any:[appSettings.ROLE_SUPER_USER, appSettings.ROLE_NSGIC_STATE_REP, appSettings.ROLE_NSGIC_STATE_ADMIN]})" routerLink="/account-datasets">Datasets</a>
+                        <a class="dropdown-item hidden-md-down" *ngIf="authenticationService.roleValidation({any:[appSettings.ROLE_SUPER_USER, appSettings.ROLE_NSGIC_STATE_REP, appSettings.ROLE_NSGIC_STATE_ADMIN]})" routerLink="/organizations">Organizations</a>
+                        <a class="dropdown-item hidden-md-down" *ngIf="authenticationService.roleValidation({any:[appSettings.ROLE_SUPER_USER, appSettings.ROLE_NSGIC_STATE_REP, appSettings.ROLE_NSGIC_STATE_ADMIN]})" routerLink="/harvest-accounts">Harvest Accounts</a>
+                        <a class="dropdown-item hidden-md-down" *ngIf="authenticationService.roleValidation({required:[appSettings.ROLE_SUPER_USER]})" routerLink="/data-layers">Layers</a>
+                        <a class="dropdown-item" (click)="signOut()"><i class="icon ion-log-out hidden-lg-up"></i> Sign Out</a>
+                    </div>
+                </div>
+                <div class="py-3 hidden-lg-up invisible">invisible text</div>
+            </div>
+        </div>
+    </div>
+</nav>

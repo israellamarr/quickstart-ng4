@@ -1,0 +1,56 @@
+:host {
+    position: relative;
+    min-height: 170px;
+    background: #444;
+    color: #FFF;
+    padding-bottom:40px;
+    z-index: 10;
+    color: white;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-align: left;
+    padding-bottom:40px;
+    font-family: Roboto;
+    margin-top: 40px;
+    z-index: 999;
+}
+:host.map {
+    display:none;
+}
+
+body.with-left-nav :host {
+    width: auto;
+}
+:host label {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+    color: #FFFFFF;
+    margin-top: 20px;
+}
+:host a {
+    display: block;
+    color: white;
+    font-size: 12px;
+    line-height: 22px;
+}
+
+:host .navbar-brand {
+    margin: 20px 0;
+    background-position: left center;
+}
+
+.account-footer-indent {
+  margin-left: 240px;
+}
+
+.footer-hide {
+  display: none;
+}
+.copyright {
+    font-weight: 100;
+    font-size: .6rem;
+    color: #f4f4f4;
+}

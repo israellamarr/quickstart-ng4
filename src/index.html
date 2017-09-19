@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<base href="/">
+<title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="/public/css/loading.css" rel="stylesheet" type="text/css">
+<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+<link rel="stylesheet" href="/public/css/dropzone.css">
+</head>
+<body>
+<my-app></my-app>
+<!-- pre-bootstrap loading animation -->
+<div id="pre-bootstrap-container">
+    <!-- PRE LOADER -->
+    <div id="preloader-container">
+        <h1 class="logo text-primary"></h1>
+        <div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>
+    </div>
+     <!--
+        In this approach, rather than putting the pre-bootstrap content inside
+        the <my-app> component content, we're leaving it external to the Angular 2
+        application entirely. This way, the content is not automatically removed when
+        the root component template is rendered. Instead, we'll leave this overlay in
+        place until the "appready" event bubbles up to the document, at which point,
+        we can gracefully fade it out of view.
+    -->
+    <script type="text/javascript">
+        var img_randomizer = Math.floor((Math.random() * 8) + 1);
+        var el = document.getElementById("preloader-container");
+        el.className = "slide_"+img_randomizer;
+        // Listen for the "appready" event, which will be emitted by the application
+        // and bubble up (as far as we know) to the document root.
+        document.addEventListener("appready", handleAppReady);
+        // I handle the "appready" event and teardown the loading screen.
+        function handleAppReady(event) {
+            var preBootstrapContainer = document.getElementById("pre-bootstrap-container");
+            var preBootstrap = document.getElementById("preloader-container");
+            // Add the class-name to initiate the transitions.
+            preBootstrapContainer.className = "loaded";
+            preBootstrap.className = "loaded";
+            // Remove the bootstrap container after the transition has
+            // completed (based on the known transition time).
+            setTimeout(
+                function removeLoadingScreen() {
+                    preBootstrapContainer.parentNode.removeChild(preBootstrapContainer);
+                },
+                1000
+            );
+        }
+    </script>
+</div><!-- END pre-bootstrap-container -->
+</body>
+</html>
