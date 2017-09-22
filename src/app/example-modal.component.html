@@ -1,0 +1,27 @@
+<div class="d-flex align-items-center justify-content-end">
+    <a class="h3 m-0" (click)="closeDialog()"><i class="material-icons">close</i></a>
+</div>
+<article class="d-flex flex-column justify-content-between h-100 p-3 pb-5" *ngIf=" ! successMessage">
+
+        <div class="mb-2 mt-2">
+        	<h3>We don't trust robots.</h3>
+        	<h5>You're not a robot, right?</h5>
+        </div>
+
+        <div>
+        	<div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+            <re-captcha class="re-captcha" (captchaResponse)="handleCorrectCaptcha($event)" site_key="{{ appSettings.GOOGLE_CAPTCHA_KEY }}"></re-captcha>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button (click)="onSubmit()" type="submit" class="btn btn-lg bg-white btn-block text-uppercase">Submit</button>
+            </div>
+        </div>
+
+</article>
+
+<article class="d-flex flex-column justify-content-center h-100 p-3 pb-5" *ngIf="successMessage">
+	<h3>Your message has been sent.</h3>
+	<h5>Thank you!</h5>
+</article>

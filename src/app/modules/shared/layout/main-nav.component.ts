@@ -1,70 +1,44 @@
-import { Component }                from '@angular/core';
+import { Component, OnInit }        from '@angular/core';
 import { CommonModule }             from '@angular/common';
-import { Router, NavigationStart }  from '@angular/router';
-import { Subscription }             from 'rxjs/Subscription';
-import { Observable }   from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 import { AppSettings }              from '../../../config/app.settings';
 
-import { slideRightLeftAnimation }  from '../animations/animations';
-import { AuthenticationService }    from '../../core/auth/authentication.service';
+import { fadeInOut, fadeAndHide, slideInOutAnimation }  from '../animations/animations';
 
 @Component({
-  selector: 'main-header-nav',
-  templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css'],
-  animations: [ slideRightLeftAnimation ]
+    selector: 'main-header-nav',
+    templateUrl: './main-nav.component.html',
+    animations: [ fadeInOut, fadeAndHide, slideInOutAnimation ]
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
 
-    isUserAuthenticated: boolean;
-    loggedInSubscription: Subscription;
-    isIn = "inactive";   // store state
+    mainNavStatus: string = "inactive";
     appSettings: any = AppSettings;
 
-    online$: Observable<boolean>;
+    constructor() {}
 
-    constructor(private authenticationService: AuthenticationService, private router: Router) {
-        this.online$ = Observable.merge(
-            Observable.of(navigator.onLine),
-            Observable.fromEvent(window, 'online').mapTo(true),
-            Observable.fromEvent(window, 'offline').mapTo(false)
-        )
-        this.loggedInSubscription = authenticationService.isLoggedInStateChanged$.subscribe(
-            isUserAuthenticated => {
-                this.isUserAuthenticated = isUserAuthenticated;
-        });
-        this.router.events.subscribe((event) => {
-            if (event instanceof NavigationStart) {
-                this.closeNav();
-            }
-        });
+    ngOnInit(): void {
+
     }
 
-    toggleState() { // click handler
-        if ( ! this.isOpen()) {
-        	this.openNav();
+    toggleMainNav(): void {
+        if ( ! this.isMainNavOpen()) {
+            this.openMainNav();
         } else {
-        	this.closeNav();
+            this.closeMainNav();
         }
     }
 
-    isOpen(): boolean {
-        return (this.isIn == "active");
+    isMainNavOpen(): boolean {
+        return (this.mainNavStatus == "active");
     }
 
-    openNav(): void {
-        this.isIn = "active";
+    openMainNav(): void {
+        this.mainNavStatus = "active";
     }
 
-    closeNav(): void {
-        this.isIn = "inactive";
-    }
-
-    signOut(): void {
-        this.isUserAuthenticated = false;
-        this.authenticationService.signOut();
+    closeMainNav(): void {
+        this.mainNavStatus = "inactive";
     }
 
 }

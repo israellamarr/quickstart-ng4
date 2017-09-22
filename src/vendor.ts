@@ -14,8 +14,4 @@ import 'rxjs';
 
 import 'hammerjs';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../public/css/mdb.css';
 
-import '@angular/material/prebuilt-themes/indigo-pink.css';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

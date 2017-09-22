@@ -1,4 +1,5 @@
 import { NgModule }                         from '@angular/core';
+import { HttpModule } 						from '@angular/http';
 import { CommonModule }                     from '@angular/common';
 import { RouterModule, Routes }  		    from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +15,7 @@ import { Loader }                           from './loader/loader.component';
 import { UtilityService }                   from './utility.service';
 
 @NgModule({
-  imports:      [ CommonModule, RouterModule, MaterialModule, MdNativeDateModule, FormsModule, ReactiveFormsModule ],
+  imports:      [ CommonModule, HttpModule, RouterModule, MaterialModule, MdNativeDateModule, FormsModule, ReactiveFormsModule ],
   declarations: [ MainFooterComponent, MainNavComponent, Loader ],
   providers:    [ UtilityService ],
   exports:      [ CommonModule, RouterModule, ReactiveFormsModule, MaterialModule, MdNativeDateModule, MainFooterComponent, MainNavComponent, Loader ]

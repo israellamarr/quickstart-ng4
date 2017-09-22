@@ -1,6 +1,0 @@
-h3 {
-  font-size: 1.2rem;
-}
-input[type=password]:focus:not([readonly]) {
-  border-bottom: 0 !important;
-}

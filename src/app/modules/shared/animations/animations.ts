@@ -1,14 +1,17 @@
-import { animate, AnimationEntryMetadata, state, style, transition, trigger } from '@angular/core';
+import { animate, AnimationEntryMetadata, state, style, transition, keyframes, trigger } from '@angular/core';
 
 export const fadeInOut: AnimationEntryMetadata = trigger('fadeInOut', [
   state('inactive', style({
     opacity: '0'
   })),
+  state('trigger-once', style({
+    opacity: '0'
+  })),
   state('active',   style({
     opacity: '1'
   })),
-  transition('inactive => active', animate('500ms ease-in')),
-  transition('active => inactive', animate('500ms ease-out'))
+  transition('* => active', animate('650ms ease-in')),
+  transition('active => *', animate('650ms ease-out'))
 ]);
 
 export const fadeOutOnly: AnimationEntryMetadata = trigger('fadeOutOnly', [
@@ -68,27 +71,11 @@ export const fadeShrinkAndHide: AnimationEntryMetadata = trigger('fadeShrinkAndH
   )
 ]);
 
-export const advancedSearchFadeInOut: AnimationEntryMetadata = trigger('advancedSearchFadeInOut', [
-  state('inactive', style({
-    opacity: '0',
-    height: 0,
-    'pointer-events': 'none'
-  })),
-  state('active',   style({
-    opacity: '1',
-    height: 'auto',
-    'pointer-events': 'auto'
-  })),
-  transition('inactive => active', animate('300ms linear')),
-  transition('active => inactive', animate('300ms linear'))
-]);
-
-
 export const slideInOutAnimation: AnimationEntryMetadata =
   trigger('slideInOutAnimation', [
     state('active',
       style({
-        transform: 'translateX(100%)'
+        transform: 'translateX(-100%)'
       })
     ),
     state('inactive',
@@ -96,24 +83,40 @@ export const slideInOutAnimation: AnimationEntryMetadata =
         transform: 'translateX(0)'
       })
     ),
-    transition('inactive => active', animate('0.5s ease-in')),
-    transition('active => inactive', animate('0.5s ease-out'))
-]);
+    transition('inactive => active', animate('0.3s linear')),
+    transition('active => inactive', animate('0.3s linear'))
+  ]);
 
-export const slideRightLeftAnimation: AnimationEntryMetadata =
-  trigger('slideRightLeftAnimation', [
-    state('inactive',
+export const slideOutAfterMainNav: AnimationEntryMetadata =
+  trigger('slideOutAfterMainNav', [
+    state('active',
       style({
-        transform: 'translateX(0%)'
+        transform: 'translateX(245px)'
       })
     ),
+    state('inactive',
+      style({
+        transform: 'translateX(0)'
+      })
+    ),
+    transition('inactive => active', animate('0.3s linear')),
+    transition('active => inactive', animate('0.3s linear'))
+]);
+
+export const lefttoRightSlide: AnimationEntryMetadata =
+  trigger('lefttoRightSlide', [
     state('active',
+      style({
+        transform: 'translateX(0)'
+      })
+    ),
+    state('inactive',
       style({
         transform: 'translateX(-100%)'
       })
     ),
-    transition('inactive => active', animate('0.35s ease')),
-    transition('active => inactive', animate('0.35s ease'))
+    transition('inactive => active', animate('0.3s linear')),
+    transition('active => inactive', animate('0.3s linear'))
 ]);
 
 
@@ -129,25 +132,31 @@ export const fadeInOutRouteAnimation: AnimationEntryMetadata =
       style({
         display: 'block',
         position: 'absolute',
+        right: 0,
+        left: 0,
         opacity: 0
       }),
-      animate('1.4s ease-in')
+      animate('.8s ease-in')
     ]),
     transition(':leave', [
       style({
         display: 'block',
-        position: 'absolute'
+        position: 'absolute',
+        right: 0,
+        left: 0
       }),
       animate('.8s ease-out', style({
         display: 'block',
         position: 'absolute',
+        right: 0,
+        left: 0,
         opacity: 0
       }))
     ])
   ]);
 
 
-
+  
 export const fadeInOutParentRouteAnimation: AnimationEntryMetadata =
   trigger('parentRouteAnimation', [
     state('*',
@@ -169,60 +178,14 @@ export const fadeInOutParentRouteAnimation: AnimationEntryMetadata =
         display: 'block',
         position: 'absolute'
       }),
-      animate('.3s ease-out', style({
-        display: 'block',
-        position: 'absolute',
-        opacity: 0
-      }))
+      animate('.3s ease-out',
+          style({
+            display: 'block',
+            position: 'absolute',
+            opacity: 0
+          })
+      )
     ])
-]);
+  ]);
 
-export const formSwitch: AnimationEntryMetadata = trigger('fadeOutOnly', [
-    state('inactive', style({
-        opacity: '0'
-    })),
-    state('active',   style({
-        opacity: '1'
-    })),
-    transition('active => inactive', animate('500ms ease-out'))
-]);
-
-
-export const formFadeInOut: AnimationEntryMetadata = trigger('formFadeInOut', [
-    state('viewMode', style({
-        height: 0,
-        opacity: '0'
-    })),
-    state('editMode', style({
-        height: '*',
-        opacity: '1'
-    })),
-    transition('viewMode => editMode', animate('400ms ease-out')),
-    transition('editMode => viewMode', animate('400ms ease-out'))
-]);
-
-export const editModeAnimation: AnimationEntryMetadata = trigger('editMode', [
-    state('inactive', style({
-        height: 0,
-        opacity: '0'
-    })),
-    state('active', style({
-        height: '*',
-        opacity: '1'
-    })),
-    transition('inactive => active', animate('700ms ease-in')),
-    transition('active => inactive', animate('600ms ease-out'))
-]);
-export const viewModeAnimation: AnimationEntryMetadata = trigger('viewMode', [
-    state('inactive', style({
-        height: 0,
-        opacity: '0'
-    })),
-    state('active', style({
-        height: '*',
-        opacity: '1'
-    })),
-    transition('inactive => active', animate('100ms ease-in')),
-    transition('active => inactive', animate('900ms ease-out'))
-]);
 

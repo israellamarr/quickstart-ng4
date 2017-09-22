@@ -2,12 +2,16 @@ import { NgModule }                 from '@angular/core';
 import { BrowserModule }            from '@angular/platform-browser';
 import { CoreModule }               from './modules/core/core.module';
 import { SharedModule }             from './modules/shared/shared.module';
-import { BrowserAnimationsModule }  from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule }  from '@angular/platform-browser/animations';
+import { ReCaptchaModule }          from 'angular2-recaptcha';
 
-import { DropzoneModule, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 
 // Components
 import { AppComponent }             from './app.component';
+import { HomeComponent }            from './home.component';
+
+// Modals
+import { ExampleModalComponent }     from './example-modal.component';
 
 // Application Routing
 import { AppRoutingModule }         from './app-routing.module';
@@ -15,11 +19,6 @@ import { AppRoutingModule }         from './app-routing.module';
 import { PageNotFoundComponent }    from './not-found.component'; // Page not found component
 
 // My Modules
-import { LoginModule }              from './modules/login/login.module'; // Login Module
-
-const DROPZONE_CONFIG: DropzoneConfigInterface = {
-
-};
 
 @NgModule({
     imports: [
@@ -27,14 +26,16 @@ const DROPZONE_CONFIG: DropzoneConfigInterface = {
         CoreModule,
         SharedModule,
         BrowserAnimationsModule,
-        DropzoneModule.forRoot(DROPZONE_CONFIG),
-        LoginModule,
+        ReCaptchaModule,
         AppRoutingModule
     ],
     declarations: [
         AppComponent,
+        HomeComponent,
+        ExampleModalComponent,
         PageNotFoundComponent
     ],
+    entryComponents: [ ExampleModalComponent ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
